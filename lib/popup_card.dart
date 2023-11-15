@@ -14,18 +14,15 @@ class PopupItemLauncher extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(32.0),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.of(context).push(HeroDialogRoute(builder: (context) {
-            return popUp!;
-          }));
-        },
-        child: Hero(
-          tag: tag!,
-          child: child!,
-        ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(HeroDialogRoute(builder: (context) {
+          return popUp!;
+        }));
+      },
+      child: Hero(
+        tag: tag!,
+        child: child!,
       ),
     );
   }
@@ -35,37 +32,28 @@ class PopupItemLauncher extends StatelessWidget {
 class PopUpItem extends StatelessWidget {
   final Object tag;
   final Widget child;
-  final Color color;
-  final double elevation;
-  final EdgeInsetsGeometry padding;
-  final ShapeBorder shape;
-  PopUpItem({
-    Key? key,
-    required this.tag,
-    required this.child,
-    required this.color,
-    required this.padding,
-    required this.shape,
-    this.elevation = 2,
-  }) : super(key: key);
+  final Alignment alignment;
+  final double reservedAppbarHeight;
+
+  PopUpItem(
+      {Key? key,
+      required this.tag,
+      required this.child,
+      this.alignment = Alignment.center,
+      this.reservedAppbarHeight = 0})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(32.0),
-        child: Hero(
-          tag: tag,
-          child: Material(
-            color: color,
-            elevation: elevation,
-            shape: shape,
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: padding,
-                child: child,
-              ),
-            ),
+    return Align(
+      alignment: alignment,
+      child: Hero(
+        tag: tag,
+        child: Container(
+          color: Colors.transparent,
+          child: Container(
+            margin: EdgeInsets.only(top: reservedAppbarHeight),
+            child: SingleChildScrollView(child: child),
           ),
         ),
       ),

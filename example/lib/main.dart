@@ -107,11 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         popUp: PopUpItem(
-          padding: EdgeInsets.all(8),
           color: Colors.white,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-          elevation: 2,
           tag: 'test',
           child: PopUpItemBody(),
         ),
